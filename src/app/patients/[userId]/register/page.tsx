@@ -1,8 +1,11 @@
-import PatientForm from "@/components/forms/patient-form";
+import RegisterForm from "@/components/forms/regitser-form";
+import { getUser } from "@/lib/actions/patient.actions";
 import Image from "next/image";
 import Link from "next/link";
+import React from "react";
 
-export default function Home() {
+const Register = async ({ params: { userId } }: SearchParamProps) => {
+	const user = await getUser(userId);
 	return (
 		<div className="flex h-screen max-h-screen">
 			{/* TODO: OTP Verification | PasskeyModal */}
@@ -15,7 +18,7 @@ export default function Home() {
 						className="h-10 w-fit mb-12"
 						alt="patient"
 					/>
-					<PatientForm />
+					<RegisterForm user={user} />
 					<div className="text-14-regular mt-20 flex justify-between">
 						<p className="justify-items-end text-dark-600 xl:text-left">
 							&copy; 2024 CarePlus
@@ -30,7 +33,7 @@ export default function Home() {
 				</div>
 			</section>
 			<Image
-				src="/assets/images/onboarding-img.png"
+				src="/assets/images/register-img.png"
 				height={1000}
 				width={1000}
 				alt="patient"
@@ -38,4 +41,6 @@ export default function Home() {
 			/>
 		</div>
 	);
-}
+};
+
+export default Register;
